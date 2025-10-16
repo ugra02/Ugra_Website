@@ -41,7 +41,7 @@ const ContactUs = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:80/api/enquiry.php", {
+      const response = await fetch("https://demo.trubizmedia.com/api/enquiry.php", {
         // update URL here
         method: "POST",
         headers: {
