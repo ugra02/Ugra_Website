@@ -15,7 +15,7 @@ function IndustryDetails() {
 
     // Fetch service from API
     axios
-      .get(`http://localhost:80/api/index.php?ind_seo_name=${industryName}`)
+      .get(`https://demo.trubizmedia.com/api/index.php?ind_seo_name=${industryName}`)
       .then((res) => {
         console.log("API Response:", res.data); // debug
         setIndustry(res.data);
