@@ -14,7 +14,7 @@ const Header = () => {
     getUser();
   }, []);
   function getUser() {
-    axios.get("http://localhost:80/api/user").then(function (response) {
+    axios.get("https://demo.trubizmedia.com/api/user").then(function (response) {
       setUser(response.data.services);
     });
   }
@@ -24,7 +24,7 @@ const Header = () => {
   }, []);
 
   function getIndustries() {
-    axios.get("http://localhost:80/api/industries").then((response) => {
+    axios.get("https://demo.trubizmedia.com/api/industries").then((response) => {
       setIndustries(response.data.industries);
     });
   }
