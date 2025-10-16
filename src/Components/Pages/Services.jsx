@@ -41,7 +41,7 @@ const Services = () => {
     getServices();
   }, []);
   function getServices() {
-    axios.get("http://localhost:80/api/services").then(function (response) {
+    axios.get("https://demo.trubizmedia.com/api/services").then(function (response) {
       setService(response.data.services);
     });
   }
