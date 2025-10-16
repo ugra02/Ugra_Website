@@ -6,7 +6,7 @@ const Industries = () => {
     getIndustries();
   }, []);
   function getIndustries() {
-    axios.get("http://localhost:80/api/industries").then(function (response) {
+    axios.get("https://demo.trubizmedia.com/api/industries").then(function (response) {
       setIndustries(response.data.industries);
     });
   }
