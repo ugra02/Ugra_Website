@@ -14,7 +14,7 @@ function ServiceDetails() {
 
     // Fetch service from API
     axios
-      .get(`http://localhost:80/api/index.php?seo_name=${serviceName}`)
+      .get(`https://demo.trubizmedia.com/api/index.php?seo_name=${serviceName}`)
       .then((res) => {
         console.log("API Response:", res.data); // debug
         setService(res.data);
