@@ -27,7 +27,7 @@ const Career = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:80/api/jobpost")
+      .get("https://demo.trubizmedia.com/api/jobpost")
       .then((res) => {
         setJobpost(res.data.jobpost || []);
         if (res.data.jobpost && res.data.jobpost.length > 0) {
@@ -75,7 +75,7 @@ const Career = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:80/api/application.php",
+        "https://demo.trubizmedia.com/api/application.php",
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
