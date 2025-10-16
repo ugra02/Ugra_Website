@@ -128,7 +128,7 @@ const Home = () => {
     getIndustries();
   }, []);
   function getIndustries() {
-    axios.get("http://localhost:80/api/industries").then(function (response) {
+    axios.get("https://demo.trubizmedia.com/api/industries").then(function (response) {
       setIndustries(response.data.industries);
     });
   }
@@ -136,7 +136,7 @@ const Home = () => {
     getServices();
   }, []);
   function getServices() {
-    axios.get("http://localhost:80/api/services").then(function (response) {
+    axios.get("https://demo.trubizmedia.com/api/services").then(function (response) {
       setService(response.data.services);
     });
   }
@@ -169,7 +169,7 @@ const Home = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost/api/submit_email.php", {
+      const response = await fetch("https://demo.trubizmedia.com/api/submit_email.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
