@@ -1,21 +1,16 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const ContactUs = () => {
-  const navigate = useNavigate();
-  const [inputs, setInputs] = useState({});
-
   const [formData, setFormData] = useState({
     name: "",
-    mobile: "", // changed from phone to mobile to match PHP backend
+    mobile: "",
     email: "",
     subject: "",
     message: "",
   });
 
-  const [status, setStatus] = useState(null); // null, 'success', 'error'
+  const [status, setStatus] = useState(null); // null | 'success' | 'error'
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,29 +25,31 @@ const ContactUs = () => {
 
     // Basic validation
     if (
-      !formData.name ||
-      !formData.email ||
-      !formData.mobile || // note this is mobile now
-      !formData.subject ||
-      !formData.message
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.mobile.trim() ||
+      !formData.subject.trim() ||
+      !formData.message.trim()
     ) {
       setStatus("error");
       return;
     }
 
     try {
-      const response = await fetch("https://demo.trubizmedia.com/api/enquiry.php", {
-        // update URL here
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://demo.trubizmedia.com/api/enquiry.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
 
-      if (response.ok && result.message) {
+      if (response.ok && result.status === "success") {
         setStatus("success");
         setFormData({
           name: "",
@@ -69,6 +66,7 @@ const ContactUs = () => {
       setStatus("error");
     }
   };
+
   return (
     <>
       <div className="pt-[100px]">
@@ -80,10 +78,8 @@ const ContactUs = () => {
             className="absolute inset-0 w-full h-full object-cover animate-zoomSlow"
             loading="lazy"
           />
-
           {/* Dark green overlay */}
           <div className="absolute inset-0 bg-[#085c4466]"></div>
-
           {/* Content container */}
           <div className="relative z-10 flex justify-center items-center h-full uppercase">
             <h1
@@ -119,13 +115,13 @@ const ContactUs = () => {
               </div>
               <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
                 <a
-                  href="mailto:work@trustly.com"
+                  href="mailto:support@ugra.in"
                   className="text-white bg-[#043c33] py-[8px] px-[20px] rounded-3xl text-center hover:bg-[#ecf86e] hover:text-[#043c33]"
                 >
                   support@ugra.in
                 </a>
                 <a
-                  href="tel:+12124258617"
+                  href="tel:+9104045352790"
                   className="text-white bg-[#043c33] py-[8px] px-[20px] rounded-3xl text-center hover:bg-[#ecf86e] hover:text-[#043c33]"
                 >
                   +91 040 45352790
@@ -135,6 +131,7 @@ const ContactUs = () => {
           </div>
         </div>
       </section>
+
       {/* Contact Form Starts */}
       <motion.section
         initial={{ opacity: 0, y: 40 }}
@@ -152,6 +149,7 @@ const ContactUs = () => {
           onSubmit={handleSubmit}
           className="space-y-6 bg-[#ecf86e] p-6 sm:p-[40px] rounded-3xl"
           aria-label="Contact form"
+          noValidate
         >
           {/* Inputs row */}
           <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
@@ -163,15 +161,17 @@ const ContactUs = () => {
               placeholder="Your name*"
               maxLength={256}
               className="flex-1 min-w-[150px] px-4 py-3 bg-white placeholder:text-[#043c33] font-geist font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-[#043c33]"
+              required
             />
             <input
               type="tel"
-              name="mobile" // changed here too from phone to mobile
+              name="mobile"
               value={formData.mobile}
               onChange={handleChange}
               placeholder="Phone*"
               maxLength={256}
               className="flex-1 min-w-[150px] px-4 py-3 bg-white placeholder:text-[#043c33] font-geist font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-[#043c33]"
+              required
             />
             <input
               type="email"
@@ -181,6 +181,7 @@ const ContactUs = () => {
               placeholder="Email*"
               maxLength={256}
               className="flex-1 min-w-[200px] px-4 py-3 bg-white placeholder:text-[#043c33] font-geist font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-[#043c33]"
+              required
             />
             <input
               type="text"
@@ -190,6 +191,7 @@ const ContactUs = () => {
               placeholder="Subject*"
               maxLength={256}
               className="flex-1 min-w-[150px] px-4 py-3 bg-white placeholder:text-[#043c33] font-geist font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-[#043c33]"
+              required
             />
           </div>
 
@@ -201,6 +203,7 @@ const ContactUs = () => {
             maxLength={5000}
             rows={6}
             className="w-full px-4 py-3 bg-white placeholder:text-[#043c33] font-geist font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-[#043c33]"
+            required
           />
 
           <div className="flex justify-center">
@@ -238,4 +241,5 @@ const ContactUs = () => {
     </>
   );
 };
+
 export default ContactUs;
